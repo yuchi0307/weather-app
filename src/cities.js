@@ -1,5 +1,4 @@
-export const cities = 
-[
+export const cities = [
 		{
 		   tag: "taipei_city",
 		   place: "臺北市",
