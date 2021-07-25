@@ -19,6 +19,12 @@ class App extends Component {
       }
     }
   }
+
+  componentDidMount()
+  {
+    fetch('https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=CWB-3A5C9611-3227-4637-AA5B-554962990E24&format=JSON')
+    .then(resp=>console.log(resp))
+  }
   // 這裡一定要用arrow function
   // 因為event是產生在 TaiwanMap onMouseOver
   // 我們是要改變 App 的 this.state 
@@ -26,13 +32,14 @@ class App extends Component {
   onCityChange = (e) => {
     const tagname = e.target.getAttribute('data-name')
     const filteredCitys = this.state.cities.filter(function (city) {
-      return city.tag === tagname
+      return city.tag === tagname //tagname為相應svg圖層的縣市
+      //把svg圖層縣市的json值放入filter出來的陣列filteredCitys
     })
-    console.log("onCityChange");
-    let filteredCity = filteredCitys[0]
-    if (filteredCity === undefined) {
-      console.log("im null")
-      filteredCity = {
+
+    let filteredCity = filteredCitys[0] //我的json資料在陣列[0]
+    if (filteredCity === undefined) { //如果到非縣市的svg圖層
+      console.log('im null') 
+      filteredCity = { //給他null值才不會整個壞掉
         tag: null,
         place: null,
         low: null,
@@ -40,24 +47,18 @@ class App extends Component {
         weather: null
       }
     }
-    console.log(filteredCity);
+    //console.log('選到的資料',filteredCity);
     this.setState({ Cityinfo: filteredCity })
 
   }
   render() {
-    console.log("onreander");
-    console.log(this.state.Cityinfo);
+    //console.log('state',this.state.Cityinfo);
     return (
       <div>
         <div className='title' >
-          <h1>TAIWAN<br />WEATHER APP
+          <h1>TAIWAN<br />WEATHER APP</h1>
             <hr />
-          </h1>
-          {/*依照state顯示json資料
-                照理說 const filteredCity 應該寫在render之下return之上才讀得到
-                但是被我的svg圖層event卡死QQ
-                <CityInfo cities={filteredCity}/>
-               */}
+          
           <CityInfo city={this.state.Cityinfo} />
 
         </div>
