@@ -1,26 +1,12 @@
 import React from 'react';
 import { ReactComponent as Map } from './map.svg';
 import './MapColor.css';
-import { cities } from './cities.js';
 
-const TaiwanMap =()=>{
-
-//function	
-const mouseOver = (e) => {
-	//抓到svg的縣市區塊
-	const tagname = e.target.getAttribute('data-name')
-	//console.log('svg:',tagname)
-	//用假資料取代抓到的縣市區塊
-	const data = cities.filter(function(city){
-		return city.tag === tagname;  
-	})
-	console.log('json:',data);
-}
-
-//return 的 內容	
+const TaiwanMap =({onMouseOver})=>{
 	return(
-		<Map className='App-map' onMouseOver={mouseOver}/>
-
+		<div>
+			<Map className='App-map' onMouseOver={onMouseOver}/>
+		</div>
 	);
 }
 
