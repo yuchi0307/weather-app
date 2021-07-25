@@ -22,8 +22,10 @@ class App extends Component {
 
   componentDidMount()
   {
-    fetch('https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=CWB-3A5C9611-3227-4637-AA5B-554962990E24&format=JSON')
-    .then(resp=>console.log(resp))
+    const url = 'https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=CWB-3A5C9611-3227-4637-AA5B-554962990E24&format=JSON'
+    fetch(url)
+    .then(resp=>resp.json())
+    .then(data=>console.log(data.cwbopendata))
   }
   // 這裡一定要用arrow function
   // 因為event是產生在 TaiwanMap onMouseOver
