@@ -58,7 +58,7 @@ class App extends Component {
                 但是被我的svg圖層event卡死QQ
                 <CityInfo cities={filteredCity}/>
                */}
-          <CityInfo place={this.state.Cityinfo.place} />
+          <CityInfo city={this.state.Cityinfo} />
 
         </div>
         {/*當滑鼠移到該縣市時觸發filter
