@@ -20,16 +20,17 @@ class App extends Component {
     }
   }
 
-  componentDidMount()
-  {
+  componentDidMount() {
     fetch('https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=CWB-3A5C9611-3227-4637-AA5B-554962990E24&format=JSON')
-    .then(resp=>console.log(resp))
+      .then(response => response.json())
+      .then(data => console.log(data));
   }
   // 這裡一定要用arrow function
   // 因為event是產生在 TaiwanMap onMouseOver
   // 我們是要改變 App 的 this.state 
   //（也就是 this 是 App 的！若不寫 arrow function 的話他會以為this.state是子層的，但子層是沒有state的唷）
   onCityChange = (e) => {
+
     const tagname = e.target.getAttribute('data-name')
     const filteredCitys = this.state.cities.filter(function (city) {
       return city.tag === tagname //tagname為相應svg圖層的縣市
@@ -38,7 +39,7 @@ class App extends Component {
 
     let filteredCity = filteredCitys[0] //我的json資料在陣列[0]
     if (filteredCity === undefined) { //如果到非縣市的svg圖層
-      console.log('im null') 
+      console.log('im null')
       filteredCity = { //給他null值才不會整個壞掉
         tag: null,
         place: null,
@@ -57,8 +58,8 @@ class App extends Component {
       <div>
         <div className='title' >
           <h1>TAIWAN<br />WEATHER APP</h1>
-            <hr />
-          
+          <hr />
+
           <CityInfo city={this.state.Cityinfo} />
 
         </div>
