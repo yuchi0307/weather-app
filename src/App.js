@@ -43,7 +43,7 @@ class App extends Component {
     const filteredCitys = this.state.ApiCity.filter(function (city){
       return city.locationName === tagname
     })
-
+    
     let filteredCity = filteredCitys[0] //我的json資料在陣列[0]
     if (filteredCity === undefined) { //如果到非縣市的svg圖層
       console.log('im null') 
@@ -55,13 +55,14 @@ class App extends Component {
       //   weather: null
       // }
     }
-
+    console.log('過濾',filteredCitys)
     //假資料串接 console.log('選到的資料',filteredCity);
-    this.setState({ Cityinfo: filteredCity })
+    //this.setState({ Cityinfo: filteredCity })
 
   }
   render() {
     console.log('state',this.state.ApiCity);
+
     return (
       <div>
         <div className='title' >
