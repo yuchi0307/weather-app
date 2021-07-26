@@ -10,6 +10,7 @@ class App extends Component {
     super()
     this.state = {
       cities: cities,
+      ApiCity:[],
       Cityinfo: {
         tag: null,
         place: null,
@@ -24,8 +25,9 @@ class App extends Component {
   {
     const url = 'https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=CWB-3A5C9611-3227-4637-AA5B-554962990E24&format=JSON'
     fetch(url)
-    .then(resp=>resp.json())
-    .then(data=>console.log(data.cwbopendata))
+    .then(resp => resp.json())
+    .then(data => this.setState({ApiCity: data.cwbopendata.dataset.location}))
+
   }
   // 這裡一定要用arrow function
   // 因為event是產生在 TaiwanMap onMouseOver
@@ -33,9 +35,13 @@ class App extends Component {
   //（也就是 this 是 App 的！若不寫 arrow function 的話他會以為this.state是子層的，但子層是沒有state的唷）
   onCityChange = (e) => {
     const tagname = e.target.getAttribute('data-name')
-    const filteredCitys = this.state.cities.filter(function (city) {
+    //串假資料的部分
+    /*const filteredCitys = this.state.cities.filter(function (city) {
       return city.tag === tagname //tagname為相應svg圖層的縣市
       //把svg圖層縣市的json值放入filter出來的陣列filteredCitys
+    })*/
+    const filteredCitys = this.state.ApiCity.filter(function (city){
+      return city.locationName === tagname
     })
 
     let filteredCity = filteredCitys[0] //我的json資料在陣列[0]
@@ -49,19 +55,21 @@ class App extends Component {
         weather: null
       }
     }
-    //console.log('選到的資料',filteredCity);
+
+    //假資料串接 console.log('選到的資料',filteredCity);
     this.setState({ Cityinfo: filteredCity })
 
   }
   render() {
-    //console.log('state',this.state.Cityinfo);
+    console.log('state',this.state.ApiCity);
     return (
       <div>
         <div className='title' >
           <h1>TAIWAN<br />WEATHER APP</h1>
             <hr />
           
-          <CityInfo city={this.state.Cityinfo} />
+          {/*假資料<CityInfo city={this.state.Cityinfo} />*/}
+           <CityInfo city={this.state.ApiCity} />
 
         </div>
         {/*當滑鼠移到該縣市時觸發filter
