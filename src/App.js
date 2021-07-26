@@ -11,13 +11,13 @@ class App extends Component {
     this.state = {
       cities: cities,
       ApiCity:[],
-      Cityinfo: {
-        tag: null,
-        place: null,
-        low: null,
-        high: null,
-        weather: null
-      }
+      // Cityinfo: {
+      //   tag: null,
+      //   place: null,
+      //   low: null,
+      //   high: null,
+      //   weather: null
+      // }
     }
   }
 
@@ -47,13 +47,13 @@ class App extends Component {
     let filteredCity = filteredCitys[0] //我的json資料在陣列[0]
     if (filteredCity === undefined) { //如果到非縣市的svg圖層
       console.log('im null') 
-      filteredCity = { //給他null值才不會整個壞掉
-        tag: null,
-        place: null,
-        low: null,
-        high: null,
-        weather: null
-      }
+      // filteredCity = { //給他null值才不會整個壞掉
+      //   tag: null,
+      //   place: null,
+      //   low: null,
+      //   high: null,
+      //   weather: null
+      // }
     }
 
     //假資料串接 console.log('選到的資料',filteredCity);

@@ -8,7 +8,7 @@ if(city.low===null)
 }
 	return (
 		<div>
-			{city.place}<br />
+			{city.locationName}<br />
 			{city.low}~{city.high}
 			<h2>{city.weather}</h2>
 
