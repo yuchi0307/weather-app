@@ -35,15 +35,19 @@ class App extends Component {
   //（也就是 this 是 App 的！若不寫 arrow function 的話他會以為this.state是子層的，但子層是沒有state的唷）
   onCityChange = (e) => {
     const tagname = e.target.getAttribute('data-name')
+    console.log('亂碼：',tagname)
+    console.log('解碼：',tagname.normalize())
     //串假資料的部分
     /*const filteredCitys = this.state.cities.filter(function (city) {
       return city.tag === tagname //tagname為相應svg圖層的縣市
       //把svg圖層縣市的json值放入filter出來的陣列filteredCitys
     })*/
-    const filteredCitys = this.state.ApiCity.filter(function (city){
-      return city.locationName === tagname
-    })
     
+    const filteredCitys = this.state.ApiCity.filter(function (city){
+      return city.locationName === tagname.normalize('NFC')
+    })
+    console.log('city.locationName',filteredCitys)
+
     let filteredCity = filteredCitys[0] //我的json資料在陣列[0]
     if (filteredCity === undefined) { //如果到非縣市的svg圖層
       console.log('im null') 
@@ -55,7 +59,7 @@ class App extends Component {
       //   weather: null
       // }
     }
-    console.log('過濾',filteredCitys)
+    console.log('過濾',filteredCity)
     //假資料串接 console.log('選到的資料',filteredCity);
     //this.setState({ Cityinfo: filteredCity })
 
