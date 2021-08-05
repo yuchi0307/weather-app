@@ -6,6 +6,7 @@ if(city.low===null)
 {
 	return null;
 }
+else{
 	return (
 		<div>
 			{city.place}<br />
@@ -15,6 +16,8 @@ if(city.low===null)
 		</div>
 
 	);
+}
+	
 }
 
 export default CityInfo;

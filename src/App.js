@@ -10,28 +10,27 @@ class App extends Component {
     super()
     this.state = {
       cities: cities,
-      ApiCity: [],
-      ApiInfo: {
-        locationName:'',
-        
+      //ApiCity: []
+      Cityinfo: {
+        tag: null,
+        place: null,
+        low: null,
+        high: null,
+        weather: null
       }
-      // Cityinfo: {
-      //   tag: null,
-      //   place: null,
-      //   low: null,
-      //   high: null,
-      //   weather: null
-      // }
     }
   }
 
-  componentDidMount() {
-    const url = 'https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=CWB-3A5C9611-3227-4637-AA5B-554962990E24&format=JSON'
-    fetch(url)
-      .then(resp => resp.json())
-      .then(data => this.setState({ ApiCity: data.cwbopendata.dataset.location }))
+  // componentDidMount() {
+  //   const url = 'https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=我的金鑰&format=JSON'
+  //   fetch(url)
+  //     .then(resp => resp.json())
+  //     .then(data => this.setState({ ApiCity: data.cwbopendata.dataset.location }))
 
-  }
+  // }
+
+  
+
   // 這裡一定要用arrow function
   // 因為event是產生在 TaiwanMap onMouseOver
   // 我們是要改變 App 的 this.state 
@@ -39,85 +38,68 @@ class App extends Component {
   onCityChange = (e) => {
     let tagname = e.target.getAttribute('data-name')
     tagname = tagname.replaceAll('\\', '%');
-    //console.log('亂碼：', tagname)
-    const svgLocation = unescape(tagname); //解決svg應轉中文data-name回傳非unicode的問題
-    //console.log('解碼：', unescape(tagname)) 
+    const svgLocation = unescape(tagname) //解決svg應轉中文data-name回傳非unicode的問題
+    console.log('解碼：', svgLocation) 
     //串假資料的部分
-    /*const filteredCitys = this.state.cities.filter(function (city) {
-      return city.tag === tagname //tagname為相應svg圖層的縣市
+    //debugger
+    const filteredCitys = this.state.cities.filter(function (city) {
+      return city.place === svgLocation //tagname為相應svg圖層的縣市
       //把svg圖層縣市的json值放入filter出來的陣列filteredCitys
-    })*/
- debugger;
-   if( svgLocation !== '圖層 1')
-   {
-      const filteredCitys = this.state.ApiCity.filter(function (city) {
-            return city.locationName === svgLocation
-          })  
-    let filteredCity = filteredCitys[0] //我的json資料在陣列[0]
-    if (filteredCity === undefined) { //如果到非縣市的svg圖層
+    })
+
+   // if( svgLocation !== '圖層 1')
+   // {
+   //    const filteredCitys = this.state.ApiCity.filter(function (city) {
+   //          return city.locationName === svgLocation
+   //        })  
+   let filteredCity = filteredCitys[0]
+    if (filteredCity === undefined) {
       console.log('im null')
-      //filteredCity = []
-      // filteredCity = { //給他null值才不會整個壞掉
-      //   tag: null,
-      //   place: null,
-      //   low: null,
-      //   high: null,
-      //   weather: null
-      // }
+      filteredCity = {
+        tag: null,
+        place: null,
+        low: null,
+        high: null,
+        weather: null
+      }
     }
-    console.log('選到的地區名稱', filteredCity)
-    //假資料串接 console.log('選到的資料',filteredCity);
-    //this.setState({ Cityinfo: filteredCity })
-    this.setState({ ApiCity: filteredCity })
-   }
-   else
-   {
-      console.log(':p')
-   }
+    console.log(filteredCity);
+    this.setState({ Cityinfo: filteredCity })
+
+    // this.setState({ ApiCity: filteredCity })
+   //}
+   // else
+   // {
+   //    console.log(':p')
+   // }
+ }
+
+
 
   
-
-  }
   render() {
-    console.log('state', this.state.ApiCity);
-    
+    //console.log('state', this.state.ApiCity);
+    console.log(this.state.Cityinfo);
     return (
       <div>
         <div className='title' >
           <h1>TAIWAN<br />WEATHER APP</h1>
           <hr />
 
-          {/*假資料<CityInfo city={this.state.Cityinfo} />*/}
-          <CityInfo city={this.state.ApiCity} />
-
-        </div>
-        {/*當滑鼠移到該縣市時觸發filter
-             別忘了到子層新增監聽onMouseOver事件*/}
-        <TaiwanMap onMouseOver={this.onCityChange} />
-      </div>
-    );
-  }
-
-}
-
-export default App;
-ityInfo city={this.state.Cityinfo} />*/}
-           <CityInfo city={this.state.ApiCity} />
-=======
-          <hr />
-
           <CityInfo city={this.state.Cityinfo} />
->>>>>>> a35c01188fe16ff1aee6fece605be8428b85041f
+          {/*<CityInfo city={this.state.ApiCity} />*/}
+          
 
         </div>
         {/*當滑鼠移到該縣市時觸發filter
-             別忘了到子層新增監聽onMouseOver事件*/}
+             到子層新增監聽onMouseOver事件*/}
         <TaiwanMap onMouseOver={this.onCityChange} />
-
       </div>
     );
   }
 
 }
+
+
 
 export default App;
