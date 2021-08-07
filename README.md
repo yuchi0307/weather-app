@@ -1,4 +1,6 @@
-【問題紀錄】
+【成果】
+https://yuchi0307.github.io/weather-app/
+【紀錄】
 
 1. onMouseOver 會選到除了縣市之外、有data-name屬性的圖層 
 -> 加入判斷式 if (filteredCity === undefined) 並給同JSON格式的資料值null
@@ -7,7 +9,8 @@
 3. (尚未解決)中央氣象局 api 資料埋很深，react 會顯示資料為物件非字串
 
 
-【CREATIVECODING】
+【來源】
 
 這是和「老闆,來點寇汀吧。Boss, CODING please」學習的專案練習，原框架為 Vue ，我是用 react 呈現。
+直播筆記網址：
 https://reurl.cc/pgN6ZQ
