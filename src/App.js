@@ -29,8 +29,6 @@ class App extends Component {
 
   // }
 
-  
-
   // 這裡一定要用arrow function
   // 因為event是產生在 TaiwanMap onMouseOver
   // 我們是要改變 App 的 this.state 
@@ -38,8 +36,10 @@ class App extends Component {
   onCityChange = (e) => {
     let tagname = e.target.getAttribute('data-name')
     tagname = tagname.replaceAll('\\', '%');
+
     const svgLocation = unescape(tagname) //解決svg應轉中文data-name回傳非unicode的問題
     console.log('解碼：', svgLocation) 
+
     //串假資料的部分
     //debugger
     const filteredCitys = this.state.cities.filter(function (city) {
@@ -74,8 +74,6 @@ class App extends Component {
    // }
  }
 
-
-
   
   render() {
     //console.log('state', this.state.ApiCity);
@@ -85,10 +83,8 @@ class App extends Component {
         <div className='title' >
           <h1>TAIWAN<br />WEATHER APP</h1>
           <hr />
-
           <CityInfo city={this.state.Cityinfo} />
           {/*<CityInfo city={this.state.ApiCity} />*/}
-          
 
         </div>
         {/*當滑鼠移到該縣市時觸發filter
