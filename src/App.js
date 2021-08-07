@@ -59,7 +59,7 @@ class App extends Component {
       //   weather: null
       // }
     }
-    console.log('過濾', filteredCity)
+    //console.log('過濾', filteredCity)
     //假資料串接 console.log('選到的資料',filteredCity);
     //this.setState({ Cityinfo: filteredCity })
 
