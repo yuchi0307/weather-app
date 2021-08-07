@@ -36,7 +36,6 @@ class App extends Component {
   onCityChange = (e) => {
     let tagname = e.target.getAttribute('data-name')
     tagname = tagname.replaceAll('\\', '%');
-
     const svgLocation = unescape(tagname) //解決svg應轉中文data-name回傳非unicode的問題
     console.log('解碼：', svgLocation) 
 
@@ -46,7 +45,7 @@ class App extends Component {
       return city.place === svgLocation //tagname為相應svg圖層的縣市
       //把svg圖層縣市的json值放入filter出來的陣列filteredCitys
     })
-
+ 
    // if( svgLocation !== '圖層 1')
    // {
    //    const filteredCitys = this.state.ApiCity.filter(function (city) {

@@ -18,7 +18,7 @@ export const cities = [
 
         {
             tag: "taichung_city",
-            place: "台中市",
+            place: "臺中市",
             low: 15,
             high: 22,
             weather: "Rainy"
@@ -146,7 +146,7 @@ export const cities = [
 
         {
             tag: "taitung_country",
-            place: "台東縣",
+            place: "臺東縣",
             low: 17,
             high: 22,
             weather: "Sunny"
